@@ -1,0 +1,39 @@
+import os
+import time
+from markovbot import MarkovBot
+
+tweetbot = MarkovBot()
+
+dirname = os.path.dirname(os.path.abspath(__file__))
+
+book = os.path.join(dirname, 'text.txt')
+
+tweetbot.read(book)
+
+my_first_text = tweetbot.generate_text(1, seedword=['Inspirational'])
+print("tweetbot says:")
+print(my_first_text)
+
+cons_key = 'LIS9Pq1PM6ZJ28c3rPXwL2uF0'
+cons_secret = 'oxrXBh13QbFxTuphQyYz86mnotDU5vlPXVqoHFg3ylpaQF55z8'
+access_token = '1214370923819798529-0SWntyFuIygy9a6mQ6xGca0B8FnANq'
+access_token_secret = 'zWIixIyudSiwpvuRFildVb2JgaTl5y69bSiWIwZaMfcLL'
+
+tweetbot.twitter_login(cons_key, cons_secret, access_token, access_token_secret)
+
+targetstring = 'kill myself'
+targetstring2 = 'depressed'
+targetstring3 = 'want to die'
+keywords = ['depression', 'sad', 'lonely', 'die']
+prefix = None
+suffix = '#positivity'
+maxconvdepth = 4
+
+tweetbot.twitter_autoreply_start(targetstring, keywords=keywords, prefix=prefix, suffix='#positivity', maxconvdepth=maxconvdepth)
+tweetbot.twitter_autoreply_start(targetstring2, keywords=keywords, prefix=prefix, suffix='#positivity', maxconvdepth=maxconvdepth)
+tweetbot.twitter_autoreply_start(targetstring3, keywords=keywords, prefix=prefix, suffix='#positivity', maxconvdepth=maxconvdepth)
+
+tweetbot.twitter_tweeting_start(days=0, hours=0, minutes=1, keywords=None, prefix=None, suffix='#positivity')
+
+secsinweek = 7 * 24 * 60 * 60
+time.sleep(secsinweek)
